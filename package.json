@@ -1,0 +1,46 @@
+{
+  "name": "vue-lucky-card",
+  "version": "0.0.1",
+  "description": "一个vue 组件，用于实现翻卡抽奖、塔罗牌抽奖",
+  "keywords": [
+    "vue",
+    "lucky draw",
+    "lottery draw",
+    "tarot"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "webpack --config build/webpack.build.js",
+    "dev": "webpack-dev-server --config build/webpack.demo.js"
+  },
+  "author": "u404",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "babel-loader": "^8.1.0",
+    "core-js": "^3.6.5",
+    "css-loader": "^4.3.0",
+    "eslint": "^7.9.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "html-webpack-plugin": "^4.4.1",
+    "lodash": "^4.17.20",
+    "mini-css-extract-plugin": "^0.11.2",
+    "node-sass": "^4.14.1",
+    "sass-loader": "^10.0.2",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.3",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.12",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {}
+}
