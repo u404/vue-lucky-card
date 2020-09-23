@@ -1,6 +1,6 @@
 {
   "name": "vue-lucky-card",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "一个vue 组件，用于实现翻卡抽奖、塔罗牌抽奖",
   "keywords": [
     "vue",
@@ -12,6 +12,10 @@
   "scripts": {
     "build": "webpack --config build/webpack.build.js",
     "dev": "webpack-dev-server --config build/webpack.demo.js"
+  },
+  "repository": {
+    "url": "https://github.com/u404/vue-lucky-card.git",
+    "type": "git"
   },
   "author": "u404",
   "license": "ISC",
