@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <Comp ref="comp" :data="cardList" :times="1" :onBeforeSelect="onBeforeSelect" >
+    <Comp ref="comp" :data="cardList" :times="1" :onBeforeSelect="onBeforeSelect" @select="onSelect">
       <div class="front-side" slot="front" slot-scope="item">Front {{item.data.id}}</div>
       <div class="back-side" slot="back" slot-scope="item">Back {{item.data.id}}</div>
     </Comp>
@@ -74,6 +74,10 @@ export default {
       })
     },
 
+    onSelect ({ index }) {
+      this.$refs.comp.enlarge(index) // 调用内置方法，在选中翻开卡片的同时，将其放大到中央
+    },
+
     // 自定义动画流程
     async myAnimation () {
       const { comp } = this.$refs
@@ -90,7 +94,7 @@ export default {
 
       comp.shuffle() // 随机打乱，这不是个动画方法，所以是同步的
 
-      await comp.scatter() // 分散开
+      await comp.clearTransform() // 分散开
 
       await comp.openAll() // 展开全部
 

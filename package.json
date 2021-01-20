@@ -1,6 +1,6 @@
 {
   "name": "vue-lucky-card",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "一个vue 组件，用于实现翻卡抽奖、塔罗牌抽奖",
   "keywords": [
     "vue",

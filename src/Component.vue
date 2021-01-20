@@ -143,8 +143,8 @@ export default {
       })
     },
 
-    // 散开
-    scatter (transition) {
+    // 清除tranform效果
+    clearTransform (transition) {
       return new Promise(resolve => {
         this._setTransition(transition, resolve)
         this._iterativeItem(item => {
@@ -186,6 +186,20 @@ export default {
       })
     },
 
+    // 放大某一项，可以通过选项指定中心坐标和放大倍数
+    enlarge (index, { centerPos = null, scale = 3 } = {}) {
+      centerPos = centerPos || this._getCenterPos()
+      const item = this.$el.children[index]
+      const itemRect = item.getBoundingClientRect()
+      const itemCenterPos = {
+        x: (itemRect.right - itemRect.left) / 2 + itemRect.left,
+        y: (itemRect.bottom - itemRect.top) / 2 + itemRect.top
+      }
+      const transform = `translate(${centerPos.x - itemCenterPos.x}px, ${centerPos.y - itemCenterPos.y}px) scale(${scale})`
+      item.style.transform = transform
+      item.style.webkitTransform = transform
+    },
+
     async select (index) {
       if (!this.list[index]) {
         return
@@ -200,16 +214,17 @@ export default {
         return
       }
       this.loading = true
+      const eventData = { index, selected: this.selected, list: this.list }
       this._onceTurnEnd(index, true, () => {
         this.loading = false
-        this.$emit('selected', { index, selected: this.selected, list: this.list })
+        this.$emit('selected', eventData)
         if (this.selected.length >= this.times) {
-          this.openAll()
-          this.$emit('complete', { index, selected: this.selected, list: this.list })
+          // this.openAll()
+          this.$emit('complete', eventData)
         }
       })
 
-      let res = this.onBeforeSelect({ index, selected: this.selected, list: this.list })
+      let res = this.onBeforeSelect(eventData)
       if (res instanceof Promise) {
         res = await res
       }
@@ -217,7 +232,11 @@ export default {
       if (typeof res === 'number' && this.list[res]) {
         this._swapItem(index, res)
       }
+
       this.selected.push(index)
+      this.$nextTick(() => {
+        this.$emit('select', eventData)
+      })
     },
 
     async random () {
@@ -233,7 +252,7 @@ export default {
 
       this.shuffle() // 随机打乱，这不是个动画方法，所以是同步的
 
-      await this.scatter() // 分散开
+      await this.clearTransform() // 分散开
 
       this.loading = false
     },
@@ -246,6 +265,8 @@ export default {
 
       this.selected = []
 
+      await this.clearTransform(false)
+
       await this.openAll(false) // 在开始时，直接展开所有的背面，无动画
 
       await new Promise(resolve => { // 展示一段时间，再执行下面的动画
@@ -257,7 +278,7 @@ export default {
 
       this.shuffle() // 随机打乱，这不是个动画方法，所以是同步的
 
-      await this.scatter() // 分散开
+      await this.clearTransform() // 分散开
 
       this.loading = false
     }
@@ -312,6 +333,11 @@ export default {
       position: relative;
       transform: rotateY(-180deg);
     }
+  }
+
+  &.active {
+    z-index: 1;
+    transition-delay: 0s;
   }
 
   &.active &-side {
