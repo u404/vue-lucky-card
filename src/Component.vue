@@ -337,7 +337,7 @@ export default {
 
   &.active {
     z-index: 1;
-    transition-delay: 0s;
+    transition-delay: 0s !important;
   }
 
   &.active &-side {
