@@ -126,9 +126,9 @@ export default {
     },
 
     // 聚拢
-    gather (transition) {
+    gather (transition, centerPos) {
       return new Promise(resolve => {
-        const centerPos = this._getCenterPos()
+        centerPos = centerPos || this._getCenterPos()
         this._setTransition(transition, resolve)
         this._iterativeItem(item => {
           const itemRect = item.getBoundingClientRect()

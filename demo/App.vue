@@ -90,15 +90,11 @@ export default {
 
       await comp.closeAll() // 合起来
 
-      await comp.gather() // 聚起来
+      await comp.gather(false, { x: window.innerWidth / 2, y: window.innerHeight }) // 聚起来
 
       comp.shuffle() // 随机打乱，这不是个动画方法，所以是同步的
 
       await comp.clearTransform() // 分散开
-
-      await comp.openAll() // 展开全部
-
-      await comp.closeAll() // 合上
 
       comp.loading = false
     }
@@ -129,6 +125,14 @@ ul {
   width: 300px;
   height: 400px;
   border: 10px solid transparent;
+
+  transition: transform ease-out 0.1s;
+
+  @for $i from 1 through 99 {
+    &:nth-child(#{$i}) {
+      transition-delay: ($i - 1) * 0.1s;
+    }
+  }
 
   &-list.open-all &.active {
     border-color: yellow;
