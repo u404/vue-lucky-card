@@ -82,7 +82,7 @@ module.exports = {
   devServer: {
     hot: true,
     open: true,
-    allowedHosts: 'all'
+    allowedHosts: ['csb.app']
   },
 
   optimization: {
