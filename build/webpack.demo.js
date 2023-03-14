@@ -82,7 +82,8 @@ module.exports = {
   devServer: {
     hot: true,
     open: true,
-    allowedHosts: ['csb.app']
+    allowedHosts: ['csb.app'],
+    disableHostCheck: true
   },
 
   optimization: {
