@@ -81,7 +81,8 @@ module.exports = {
 
   devServer: {
     hot: true,
-    open: true
+    open: true,
+    allowedHosts: 'all'
   },
 
   optimization: {
