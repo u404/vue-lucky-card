@@ -3,7 +3,7 @@
 
 ### Demo
 
-[Demo Link](https://github.com/u404/vue-lucky-card)
+[Demo Link](https://qwd1lt-8080.csb.app/)
 
 
 ### 使用方法
